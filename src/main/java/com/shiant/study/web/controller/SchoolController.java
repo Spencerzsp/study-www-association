@@ -153,5 +153,6 @@ public class SchoolController {
                  sdf.parse(createDate),
                  sdf.parse(updateDate)
                  );
+         System.out.println("---------");
      }
 }
