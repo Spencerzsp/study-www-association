@@ -1,0 +1,36 @@
+
+  <div class="layui-form" lay-filter="layuiadmin-domain-name-form" id="layuiadmin-domain-name-form"style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">域名</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="domain" value="{{ d.params.domain || '' }}" lay-verify="required" placeholder="请输入域名" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">网站名</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="title" value="{{ d.params.title || '' }}" lay-verify="required" placeholder="请输入网站名" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">别名</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="alias" value="{{ d.params.alias || '' }}" lay-verify="required" placeholder="请输入别名" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <script type="text/html" template>
+      <input type="hidden" name="id" value="{{ d.params.id || '' }}">
+    </script>
+    <div class="layui-form-item">
+      <label class="layui-form-label"></label>
+      <div class="layui-input-inline">
+        <input type="button" lay-submit lay-filter="layuiadmin-domain-name-form-submit" value="确认" class="layui-btn">
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,131 @@
+
+  <div class="layui-form" lay-filter="layuiadmin-type-list-form" id="layuiadmin-type-list-form"style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">分类名</label>
+      <div class="layui-input-inline">
+         <select name="type" lay-verify="required">
+	        <option value="type1">type1</option>
+	        <option value="type2">type2</option>
+	        <option value="type3">type3</option>
+	        <option value="type4">type4</option>
+	        <option value="type5">type5</option>
+	     </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">文章名</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="title" value="{{ d.params.title || '' }}" lay-verify="required" placeholder="请输入文章名" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">域名</label>
+      <div class="layui-input-inline">
+        <select name="domain" lay-verify="required" lay-search="">
+       		<option value="">直接选择或搜索选择</option>
+    	</select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">序号</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="number" name="order" value="{{ d.params.order || 1 }}" lay-verify="required" placeholder="请输入序号" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">超链接</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="url" value="{{ d.params.url || '' }}" placeholder="请输入超链接" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">展示次数</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="number" name="showTime" value="{{ d.params.showTime || 0 }}" lay-verify="required" placeholder="请输入展示次数" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+  	<!-- <div class="layui-form-item">
+      <label class="layui-form-label">是否显示</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" lay-verify="required" lay-filter="status" name="isShow" lay-skin="switch" lay-text="显示|隐藏">
+      </div>
+    </div> -->
+    <div class="layui-form-item">
+      <label class="layui-form-label">文章内容</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <textarea name="content" lay-verify="required" style="width: 400px; height: 150px;" autocomplete="off" class="layui-textarea">
+            {{ d.params.content || '' }}
+          </textarea>
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">封面图</label>
+      <div class="layui-input-inline" >
+  		<div class="layui-upload">
+     		<button type="button" class="layui-btn" id="cover-upload">上传图片</button>
+       		<div class="layui-upload-list">
+      		<img class="layui-upload-img" id="cover-upload-img" style="width: 200px;" src="">
+    			<p id="type-list-upload-text"></p>
+       		</div>
+ 		</div> 
+		<input type="text" name="coverUrl" value="" lay-verify="required" class="layui-input" style="display: none;">
+      </div>
+    </div>
+    <script type="text/html" template>
+      <input type="hidden" name="aid" value="{{ d.params.aid || '' }}">
+    </script>
+    <div class="layui-form-item">
+      <label class="layui-form-label"></label>
+      <div class="layui-input-inline">
+        <input type="button" lay-submit lay-filter="layuiadmin-type-list-form-submit" value="确认" class="layui-btn">
+      </div>
+    </div>
+  </div>
+  <script>
+	  layui.use(['admin', 'upload', 'layer'], function(){
+	    var $ = layui.jquery
+	    ,layer = layui.layer
+	    ,upload = layui.upload;
+	    
+	    var uploadInst = upload.render({
+	      elem: '#cover-upload'
+	      ,url: layui.setter.url+'/service/file/upload?base=article'
+	      ,accept: 'images' //只允许上传图片
+	      ,acceptMime: 'image/*' //只筛选图片
+	      ,size: 1024*2 //限定大小 单位 KB
+	      ,before: function(obj){
+	    	layer.msg("上传中...",{time:2000});
+	        //预读本地文件示例，不支持ie8
+	        obj.preview(function(index, file, result){
+	          $('#cover-upload-img').attr('src', result); //图片链接（base64）
+	        });
+	      }
+	      ,done: function(res){
+	        //如果上传失败
+	        if(res.code > 0){
+	          return layer.msg('上传失败');
+	        }
+	        //上传成功
+	        $('input[name="coverUrl"]').val(res.data);
+	      }
+	      ,error: function(){
+	        //演示失败状态，并实现重传
+	        var demoText = $('#cover-upload-text');
+	        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+	        demoText.find('.demo-reload').on('click', function(){
+	          uploadInst.upload();
+	        });
+	      }
+	    });
+	  })
+  </script>

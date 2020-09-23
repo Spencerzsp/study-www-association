@@ -1,0 +1,45 @@
+
+
+  <title class="lang" data-lang="企业列表"></title>
+  
+  <div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+      <a lay-href="" class="lang" data-lang="主页"></a>
+      <a><cite class="lang" data-lang="企业管理"></cite></a>
+      <a><cite class="lang" data-lang="企业列表"></cite></a>
+    </div>
+  </div>
+
+  <div class="layui-fluid">
+    <div class="layui-card">
+      <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="app-content-list">
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <label class="layui-form-label lang" data-lang="企业名称"></label>
+            <div class="layui-input-inline">
+              <input type="text" name="orgName" placeholder="请输入" autocomplete="off" class="layui-input lang">
+            </div>
+          </div>
+          <div class="layui-inline">
+            <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-organization-search">
+              <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="layui-card-body">
+        <div style="padding-bottom: 10px;">
+          <button class="layui-btn layuiadmin-btn-list lang" data-type="add" data-lang="添加"></button>
+          <button class="layui-btn layuiadmin-btn-list lang" data-type="batchdel" data-lang="删除"></button>
+        </div>
+        <table id="LAY-table-organization" lay-filter="LAY-table-filter-organization"></table> 
+        <script type="text/html" id="table-content-list">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit lang" data-lang="编辑"></i></a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete lang" data-lang="删除"></i></a>
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <script src="./views/src/js/organization/organization-list.js"></script>

@@ -1,0 +1,54 @@
+
+  <div class="layui-form" lay-filter="layuiadmin-type-form" id="layuiadmin-type-form"style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">分类名</label>
+      <div class="layui-input-inline">
+         <select name="name" lay-verify="required">
+	        <option value="type1">type1</option>
+	        <option value="type2">type2</option>
+	        <option value="type3">type3</option>
+	        <option value="type4">type4</option>
+	        <option value="type5">type5</option>
+	     </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">域名</label>
+      <div class="layui-input-inline">
+        <select name="domain" lay-verify="required" lay-search="">
+       		<option value="">直接选择或搜索选择</option>
+    	</select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">别名</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="alias" value="{{ d.params.alias || '' }}" placeholder="请输入别名" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">超链接</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="url" value="{{ d.params.url || '' }}" placeholder="请输入超链接" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+   	<div class="layui-form-item">
+      <label class="layui-form-label">是否显示</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" lay-verify="required" lay-filter="status" name="isShow" lay-skin="switch" lay-text="显示|隐藏">
+      </div>
+    </div>
+    <script type="text/html" template>
+      <input type="hidden" name="atid" value="{{ d.params.atid || '' }}">
+    </script>
+    <div class="layui-form-item">
+      <label class="layui-form-label"></label>
+      <div class="layui-input-inline">
+        <input type="button" lay-submit lay-filter="layuiadmin-type-form-submit" value="确认" class="layui-btn">
+      </div>
+    </div>
+  </div>

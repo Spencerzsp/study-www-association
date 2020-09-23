@@ -1,0 +1,140 @@
+
+<form class="layui-form" lay-filter="layuiadmin-user-form"
+	id="layuiadmin-user-form" style="padding: 20px 30px 0 0;">
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="账号名"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          		<input type="text" name="userName" value="{{ d.params.userName || '' }}" lay-verify="required" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("账号名") }}" autocomplete="off" class="layui-input {{# if(d.params.oid){ }}layui-disabled{{# } }}">
+        	</script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="用户名"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          		<input type="text" name="userRealName" value="{{ d.params.userRealName || '' }}" lay-verify="required" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("用户名") }}" autocomplete="off" class="layui-input {{# if(d.params.oid){ }}layui-disabled{{# } }}">
+        	</script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="手机号"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          		<input type="text" name="phone" value="{{ d.params.phone || '' }}" lay-verify="phone" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("手机号") }}" autocomplete="off" class="layui-input {{# if(d.params.oid){ }}layui-disabled{{# } }}">
+        	</script>
+		</div>
+	</div>
+	<div class="layui-form-item" id="userPwd_div">
+		<label class="layui-form-label lang" data-lang="密码"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          		<input type="text" name="userPwd" value="{{ d.params.userPwd || '' }}" lay-verify="required" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("密码") }}" autocomplete="off" class="layui-input">
+        	</script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="所属企业"></label>
+		<div class="layui-input-block">
+			<select id="org-list" name="orgid" class="city-selector" lay-filter="select-org">
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="角色"></label>
+		<div class="layui-input-block">
+			<select name="roleid" lay-verify="" lay-search>
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="状态"></label>
+		<div class="layui-input-block">
+			<input type="checkbox" name="delete" lay-skin="switch" checked>
+	    </div>
+	</div>
+	<script type="text/html" template>
+      <input type="hidden" name="userid" value="{{ d.params.userid || '' }}">
+    </script>
+	<div class="layui-form-item">
+		<label class="layui-form-label"></label>
+		<div class="layui-input-inline">
+			<input type="button" lay-submit
+				lay-filter="layuiadmin-user-form-submit" value="确认"
+				class="layui-btn">
+		</div>
+	</div>
+</form>
+<script type="text/html" template lay-done="layui.data.sendParams(d.params)">
+</script>
+<script>
+layui.data.sendParams = function(params){
+	layui.use([ 'admin', 'form' ], function() {
+		form = layui.form;
+		var orgid_;
+		
+		initOrgData = function (keyWord) {
+			$.ajax({
+				url:layui.setter.url+'/service/organization/getBeansByUser?page=1&limit=20'+
+						(keyWord?"&orgName="+encodeURIComponent(encodeURIComponent(keyWord)):""),
+				type:"GET",
+				dataType:"json",
+				success:function(data){
+					var html = '';
+					for(var i=0;i<data.data.length;i++){
+						html = html+"<option value='"+data.data[i].orgid+"'>" + data.data[i].orgName +"</option>"
+					}
+					$("#org-list").empty().append(html);
+					if(orgid_){
+						$("#org-list").val(orgid_);
+					}
+					form.render('select'); 
+				},
+				error:function(data){
+					layer.msg(shiant.l(data.msg));
+				}
+			});
+		}
+		
+		initData = function () {
+			$.ajax({
+					url:layui.setter.url+'/service/user/getBean?id='+params.userid,
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						$('input[name="userRealName"]').val(data.bean.userRealName);
+						$('input[name="phone"]').val(data.bean.phone);
+						$('input[name="userPwd"]').val("密码");
+						$('#userPwd_div').hide();
+						$('input[name="userName"]').attr("disabled","disabled");
+						orgid_ = data.bean.orgid;
+						$("#org-list").val(orgid_);
+						form.render('select'); 
+					},
+					error:function(data){
+						layer.msg(shiant.l(data.msg));
+					}
+				});
+			
+		}
+		
+		$('input[name="delete"]').attr("lay-text",shiant.l("启用")+"|"+shiant.l("停用"));
+		if(params['delete']){
+			$('input[name="delete"]').removeAttr("checked");
+		}
+		
+		initOrgData();
+		form.on('select(select-org)',function(data){
+		    console.info(data.value);
+		})
+		
+		if(params.userid){
+			initData();
+		}
+		
+		//$('#logo-upload-img').attr("src",params.orgLogo);
+		form.render(); 
+
+	});
+}
+</script>

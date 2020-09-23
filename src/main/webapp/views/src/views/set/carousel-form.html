@@ -1,0 +1,102 @@
+
+  <div class="layui-form" lay-filter="layuiadmin-carousel-form" id="layuiadmin-carousel-form"style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">域名</label>
+      <div class="layui-input-inline">
+   		<select name="domain" lay-verify="required" lay-search="">
+       		<option value="">直接选择或搜索选择</option>
+    	</select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">序号</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="number" name="order" value="{{ d.params.order || 1 }}" lay-verify="required" placeholder="请输入序号" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">超链接</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="url" value="{{ d.params.url || '' }}" placeholder="请输入超链接" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">轮播名</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <textarea name="title" style="width: 400px; height: 150px;" autocomplete="off" class="layui-textarea">
+            {{ d.params.title || '' }}
+          </textarea>
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">轮播图</label>
+      <div class="layui-input-inline" >
+	  	<div class="layui-upload">
+     		<button type="button" class="layui-btn" id="carousel-upload">上传图片</button>
+       		<div class="layui-upload-list">
+      			<img class="layui-upload-img" id="carousel-upload-img" style="width: 200px;" src="">
+          		<p id="carousel-upload-text"></p>
+       		</div>
+    	</div> 
+     	<script type="text/html" template>
+			<input type="text" name="fileUrl" value="{{ d.params.fileUrl || '' }}" lay-verify="required" class="layui-input" style="display: none;">
+        </script>
+      </div>
+    </div>
+    <script type="text/html" template>
+      <input type="hidden" name="id" value="{{ d.params.id || '' }}">
+    </script>
+    <div class="layui-form-item">
+      <label class="layui-form-label"></label>
+      <div class="layui-input-inline">
+        <input type="button" lay-submit lay-filter="layuiadmin-carousel-form-submit" value="确认" class="layui-btn">
+      </div>
+    </div>
+  </div>
+  
+  <script>
+	  layui.use(['admin', 'upload', 'form', 'layer'], function(){
+	    var $ = layui.jquery
+	    ,upload = layui.upload
+	    ,layer = layui.layer
+	    ,form = layui.form;
+	  
+	    //普通图片上传
+	    var uploadInst = upload.render({
+	      elem: '#carousel-upload'
+	      ,url: layui.setter.url+'/service/file/upload?base=carousel'
+	      ,accept: 'images' //只允许上传图片
+	      ,acceptMime: 'image/*' //只筛选图片
+	      ,size: 1024*3 //限定大小 单位 KB
+	      ,before: function(obj){
+	    	layer.msg("上传中...",{time:2000});
+	        //预读本地文件示例，不支持ie8
+	        obj.preview(function(index, file, result){
+	          $('#carousel-upload-img').attr('src', result); //图片链接（base64）
+	        });
+	      }
+	      ,done: function(res){
+	        //如果上传失败
+	        if(res.code > 0){
+	          return layer.msg('上传失败');
+	        }
+	        //上传成功
+	        $('input[name="fileUrl"]').val(res.data);
+	      }
+	      ,error: function(){
+	        //演示失败状态，并实现重传
+	        var demoText = $('#carousel-upload-text');
+	        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+	        demoText.find('.demo-reload').on('click', function(){
+	          uploadInst.upload();
+	        });
+	      }
+	    });
+	  })
+  </script>

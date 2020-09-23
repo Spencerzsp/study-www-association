@@ -1,0 +1,169 @@
+@-webkit-keyframes spinner-grow {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  50% {
+    opacity: 1; } }
+
+@keyframes spinner-grow {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  50% {
+    opacity: 1; } }
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 15000;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+.loading .spinner-grow {
+    width: 100px;
+    height: 100px; 
+    display: inline-block;
+    vertical-align: text-bottom;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-animation: spinner-grow .75s linear infinite;
+    animation: spinner-grow .75s linear infinite;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.appHeader {
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9990;
+    background: #f2f2f2;
+    border-bottom: 1px solid #E5E9F2;
+    color: #1B2C42;
+}
+.appHeader h6 {
+    color: #000;
+    font-weight: 700;
+}
+.appHeader img {
+    width: 40px;
+    height: 40px;
+}
+.appHeader .left {
+    left: 0;
+    right: auto;
+}
+.appHeader .left, .appHeader .right {
+    position: absolute;
+    top: 0;
+    transition: 0.2s all;
+    height: 56px;
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.appHeader .left .icon, .appHeader .right .icon {
+    width: 56px;
+    height: 56px;
+    /* color: #fff; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.appHeader .left:active, .appHeader .right:active {
+    opacity: 0.8;
+}
+.appHeader .pageTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    line-height: 1em;
+}
+.appContent{
+   padding: 56px 20px 56px 20px;
+   background: #FFFFFF;
+} 
+.appBottomMenu {
+    height: 56px;
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FFF;
+    border-top: 1px solid #E5E9F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.appBottomMenu .item {
+    width: 20%;
+    text-align: center;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.appBottomMenu .item > a {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    justify-content: center;
+    color: #1B2C42 !important;
+    position: relative;
+}
+.appBottomMenu .item.active {
+	position: relative; 
+}
+.appBottomMenu .item.active > a {
+	color: #156879 !important; 
+}
+.appBottomMenu .item.active:after {
+    content: '';
+    height: 2px;
+    border-radius: 0 0 10px 10px;
+    display: block;
+    background: #156879;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+.appBottomMenu .item p {
+    margin: 0;
+}
+.appBottomMenu .item i {
+    font-size: 26px;
+    line-height: 0;
+    margin-bottom: 17px;
+    display: block;
+}
+.appBottomMenu .item span {
+    display: block;
+    font-size: 11px;
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    right: 0;
+}
+.appFooter {
+	border-top: 1px solid #E5E9F2;
+	padding: 30px 20px;
+	font-size: 14px;
+	line-height: 1.5em;
+	text-align: center;
+}

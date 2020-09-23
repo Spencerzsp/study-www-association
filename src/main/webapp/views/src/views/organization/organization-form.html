@@ -1,0 +1,193 @@
+
+<form class="layui-form" lay-filter="layuiadmin-organization-form"
+	id="layuiadmin-organization-form" style="padding: 20px 30px 0 0;">
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="企业名称"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="orgName" value="{{ d.params.orgName || '' }}" lay-verify="required" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("企业名称") }}" autocomplete="off" class="layui-input {{# if(d.params.oid){ }}layui-disabled{{# } }}">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="企业代码"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="orgCode" value="{{ d.params.orgCode || '' }}" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("企业代码") }}" autocomplete="off" class="layui-input">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="企业规模"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="orgScale" value="{{ d.params.orgScale || '' }}" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("企业规模") }}" autocomplete="off" class="layui-input">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="所属行业"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="industry" value="{{ d.params.industry || '' }}" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("所属行业") }}" autocomplete="off" class="layui-input">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="客户数量"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="customerNum" value="{{ d.params.customerNum || '' }}" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("客户数量") }}" autocomplete="off" class="layui-input">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="企业管理员姓名"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="legalPerson" value="{{ d.params.legalPerson || '' }}" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("企业管理员姓名") }}" autocomplete="off" class="layui-input">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="企业管理员手机号"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          <input type="text" name="legalPersonPhone" value="{{ d.params.legalPersonPhone || '' }}" lay-verify="phone" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("企业管理员手机号") }}" autocomplete="off" class="layui-input">
+        </script>
+		</div>
+	</div>
+	<div class="layui-form-item" id="area-picker">
+		<div class="layui-form-label lang" data-lang="地址"></div>
+		<div class="layui-input-inline" style="width: 200px;">
+			<select name="province" class="province-selector"
+				lay-filter="province-1">
+				<option value="" class="lang" data-lang="请选择省"></option>
+			</select>
+		</div>
+		<div class="layui-input-inline" style="width: 200px;">
+			<select name="city" class="city-selector" lay-filter="city-1">
+				<option value="" class="lang" data-lang="请选择市"></option>
+			</select>
+		</div>
+		<div class="layui-input-inline" style="width: 200px;">
+			<select name="county" class="county-selector" lay-filter="county-1">
+				<option value="" class="lang" data-lang="请选择区"></option>
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="详细地址"></label>
+		<div class="layui-input-block">
+			<script type="text/html" template>
+          		<input type="text" name="address" value="{{ d.params.address || '' }}" lay-verify="required" placeholder="{{ shiant.l("请输入") }}{{ shiant.l("详细地址") }}" autocomplete="off" class="layui-input">
+       		</script>
+		</div>
+	</div>
+	<div class="layui-form-item">
+      <label class="layui-form-label lang" data-lang="图标"></label>
+      <div class="layui-input-inline" >
+	  	<div class="layui-upload">
+     		<button type="button" class="layui-btn lang" id="logo-upload" data-lang="上传图片"></button>
+       		<div class="layui-upload-list">
+      			<img class="layui-upload-img" id="logo-upload-img" style="width: 200px;" src="">
+          		<p id="logo-upload-text"></p>
+       		</div>
+    	</div> 
+     	<script type="text/html" template>
+			<input type="text" name="orgLogo" value="{{ d.params.orgLogo || '' }}" class="layui-input" style="display: none;">
+        </script>
+      </div>
+    </div>
+	<div class="layui-form-item">
+		<label class="layui-form-label lang" data-lang="状态"></label>
+		<div class="layui-input-block">
+			<input type="checkbox" name="delete" lay-skin="switch" checked>
+	    </div>
+	</div>
+	<script type="text/html" template>
+      <input type="hidden" name="orgid" value="{{ d.params.orgid || '' }}">
+    </script>
+	<div class="layui-form-item">
+		<label class="layui-form-label"></label>
+		<div class="layui-input-inline">
+			<input type="button" lay-submit
+				lay-filter="layuiadmin-organization-form-submit" value="确认"
+				class="layui-btn">
+		</div>
+	</div>
+</form>
+<script type="text/html" template lay-done="layui.data.sendParams(d.params)">
+</script>
+<script>
+layui.data.sendParams = function(params){
+	layui.use([ 'admin', 'upload', 'layarea','form' ], function() {
+	    upload = layui.upload
+		layarea = layui.layarea;
+		form = layui.form;
+		
+		$('input[name="delete"]').attr("lay-text",shiant.l("启用")+"|"+shiant.l("停用"));
+		if(params['delete']){
+			$('input[name="delete"]').removeAttr("checked");
+		}
+		$('#logo-upload-img').attr("src",params.orgLogo);
+		form.render(); 
+
+		if(params.oid){
+			layarea.render({
+				elem : '#area-picker',
+				data: {
+		            province: params.province,
+		            city: params.city,
+		       		county: params.county,
+		        },
+				change : function(res) {
+					//console.log(res);
+				}
+			});
+		}else{
+			layarea.render({
+				elem : '#area-picker',
+				data: {
+		            province: '贵州省',
+		        },
+				change : function(res) {
+					//console.log(res);
+				}
+			});
+		}
+		
+		 //普通图片上传
+	    var uploadInst = upload.render({
+	      elem: '#logo-upload'
+	      ,url: shiant.getResHttpPrefix()+'/image?path=/center/management/organization/logo'
+	      ,accept: 'images' //只允许上传图片
+	      ,acceptMime: 'image/*' //只筛选图片
+	      ,size: 1024*3 //限定大小 单位 KB
+	      ,before: function(obj){
+	    	layer.msg(shiant.l("上传中"),{time:2000});
+	        //预读本地文件示例，不支持ie8
+	        obj.preview(function(index, file, result){
+	          $('#logo-upload-img').attr('src', result); //图片链接（base64）
+	        });
+	      }
+	      ,done: function(res){
+	        //如果上传失败
+	        if(res.code > 0){
+	          return layer.msg(shiant.l('上传失败'));
+	        }
+	        //上传成功
+	        $('input[name="orgLogo"]').val(res.url);
+	      }
+	      ,error: function(){
+	        //演示失败状态，并实现重传
+	        var demoText = $('#logo-upload-text');
+	        demoText.html('<span style="color: #FF5722;">'+shiant.l("上传失败")+'</span> <a class="layui-btn layui-btn-mini demo-reload">'+shiant.l("重试")+'</a>');
+	        demoText.find('.demo-reload').on('click', function(){
+	          uploadInst.upload();
+	        });
+	      }
+	    });
+	});
+}
+</script>

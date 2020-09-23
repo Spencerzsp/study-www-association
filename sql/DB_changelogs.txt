@@ -1,0 +1,141 @@
+﻿#Note:
+# 1. 数据库脚本每两周(第二周最后一个工作日)备份一次到sql根目录, 命名方式 LIMS_CORE_backup_备份日期.SQL, 例如: LIMS_CORE_backup_20130508.SQL
+# 2. 每个Use Case的脚本文件放在以各自命名的文件夹下, 例如： Use Case 14的脚本放在 文件夹名称为Use Case 14的文件夹下.
+# 3. 关于脚本命名约定:
+#	3.1 以UC开头, 后面追加Use Case No 或者Name, 例如: UC_template_XXX.
+#	3.2 脚本文件以DDL, DML 区分, 例如, UC_template_DDL.sql, UC_template_DML.sql.
+#	3.3 多个脚本文件用递增数字区别, 例如: Use Case template文件夹下有多个DDL文件：  UC_template_DDL_1.sql, UC_template_DDL_2.sql...., DML文件类似
+# 4. 每次有新脚本提交都需要更新到DB_changelogs.txt中
+# 5. 以下 2013-05-08 为例子： 
+# 6. 新加入的开发人员拿到最新的backup脚本后, 只需要运行备份后的DDL和DML脚本
+################################################################################################################
+----------------------------------------------------------------------------------------------------------------
+############################################ SMS START PLACE ####################################################################
+---------------------2015-12-01-------------------
+#Author: AkatsukiSimo Xie
+#Description:初始化数据库提交
+#Files:
+#Files Name: 
+initialize\sms_core.sql
+-------------------------------------------------
+
+---------------------2019-07-15-------------------
+#Author: mxq
+#Description:新建equipment表
+#Files:
+#Files Name: 
+initialize\UC_equipment_DDL_1.sql
+-------------------------------------------------
+
+---------------------2019-07-15-------------------
+#Author: mxq
+#Description:新建t_buss_cultivate表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_cultivate_DDL_1.sql
+-------------------------------------------------
+
+---------------------2019-07-15-------------------
+#Author: mxq
+#Description:新建t_buss_expert表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_expert_DDL_1.sql
+-------------------------------------------------
+
+---------------------2019-07-16-------------------
+#Author: wl
+#Description:新建t_buss_standard表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_expert_DDL_1.sql
+-------------------------------------------------
+---------------------2019-07-16-------------------
+#Author: wl
+#Description:向t_buss_standard表中插入测试数据
+#Files:
+#Files Name: 
+initialize\UC_t_buss_expert_DML_1.sql
+-------------------------------------------------
+
+---------------------2019-08-01-------------------
+#Author: YTY
+#Description:新建t_buss_application表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_application_DDL_1.sql
+-------------------------------------------------
+
+---------------------2019-08-01-------------------
+#Author: YTY
+#Description:向t_buss_application表中插入测试数据
+#Files:
+#Files Name: 
+initialize\UC_t_buss_application_DML_1.sql
+-------------------------------------------------
+
+---------------------2019-08-06-------------------
+#Author: MXQ
+#Description:向t_buss_application表中插入测试数据
+#Files:
+#Files Name: 
+initialize\UC_t_buss_organization\UC_t_buss_organization_DDL_1.sql
+initialize\UC_t_buss_organization\UC_t_buss_organization_DML_1.sql
+-------------------------------------------------
+---------------------2019-08-08-------------------
+#Author: YTY
+#Description:新建t_buss_technical表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_technical_DDL_1.sql
+-------------------------------------------------
+---------------------2019-08-12-------------------
+#Author: YTY
+#Description:新建t_buss_judge表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_judge_DDL_1.sql
+-------------------------------------------------
+---------------------2019-08-15-------------------
+#Author: YTY
+#Description:修改t_buss_user表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_user_DDL_2.sql
+-------------------------------------------------
+---------------------2019-08-16-------------------
+#Author: YTY
+#Description:修改t_buss_equipment表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_equipment_DDL_2.sql
+-------------------------------------------------
+---------------------2019-09-06-------------------
+#Author: YTY
+#Description:新建t_buss_category表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_category_DDL_1.sql
+-------------------------------------------------
+
+---------------------2019-09-10-------------------
+#Author: WL
+#Description:新建t_buss_banner表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_banner_DDL_1.sql
+-------------------------------------------------
+---------------------2019-09-10-------------------
+#Author: YTY
+#Description:新建t_buss_article表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_article_DDL_1.sql
+-------------------------------------------------
+---------------------2019-09-11-------------------
+#Author: YTY
+#Description:新建t_buss_blogroll表
+#Files:
+#Files Name: 
+initialize\UC_t_buss_blogroll_DDL_1.sql
+-------------------------------------------------
